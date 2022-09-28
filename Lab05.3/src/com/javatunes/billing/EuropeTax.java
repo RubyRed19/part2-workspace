@@ -8,6 +8,8 @@
  */
 package com.javatunes.billing;
 
+import com.sun.source.doctree.ValueTree;
+
 /**
  * European orders are taxed as follows:
  *  VAT is 17% of taxable amount.
@@ -15,6 +17,23 @@ package com.javatunes.billing;
  *  
  * TODO: implement this algorithm.
  */
-public class EuropeTax {
+public class EuropeTax implements TaxCalculator{
 
+
+  @Override
+  public double taxAmount(double taxable) {
+    double VAT = 0.17;
+    double luxTaxRate = 0.25;
+    double result = taxable * VAT;
+    if( taxable > 100) {
+      double luxuryTax = (taxable-100) * luxTaxRate;
+      result += luxuryTax;
+    }
+    return result;
+  }
+  //if (taxable > 100){
+  //      double luxuryTax = (taxable-100) * .25;
+  //      taxes += luxuryTax;
+  //    }
+  //    return taxes;
 }
